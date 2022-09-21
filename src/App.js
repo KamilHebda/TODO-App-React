@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Details from "../src/components/Details/Details";
+import DetailsList from "../src/components/DetailsList/DetailsList";
 import AddTask from "../src/components/AddTask/AddTask";
 import TaskList from "../src/components/TaskList/TaskList";
 
@@ -12,17 +12,17 @@ class App extends Component {
         id: 0,
         text: "Nauczyć się React",
         description: "Ogarnąć hooki i MobX",
-        Date: null,
+        date: null,
         finishDate: "2022-09-30",
         active: true,
         edit: false,
-        details: false,
+        details: true,
       },
       {
         id: 1,
         text: "Nauczyć się TypeScript",
-        description: "Masakra",
-        Date: null,
+        description: "Damy radę",
+        date: null,
         finishDate: "2022-12-31",
         active: true,
         edit: false,
@@ -32,7 +32,7 @@ class App extends Component {
         id: 2,
         text: "Nadal się uczyć",
         description: "...",
-        Date: null,
+        date: null,
         finishDate: "2023-12-31",
         active: true,
         edit: false,
@@ -78,10 +78,25 @@ class App extends Component {
     });
   };
 
+  closeDetails = (id) => {
+    const tasks = [...this.state.tasks];
+    tasks.forEach((task) => {
+      if (task.id === id) {
+        task.details = false;
+      }
+    });
+    this.setState({
+      tasks,
+    });
+  };
+
   render() {
     return (
       <div className="App">
-        <Details tasks={this.state.tasks} />
+        <DetailsList
+          tasks={this.state.tasks}
+          closeDetails={this.closeDetails}
+        />
         <div className="todo">
           <AddTask />
           <TaskList

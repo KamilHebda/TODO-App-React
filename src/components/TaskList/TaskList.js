@@ -16,8 +16,13 @@ function TaskList(props) {
   return (
     <div className="todo-list">
       <h3>Lista zadań:</h3>
-      <p className="todo-list alert-info">Brak zadań na liście.</p>
-      <ul className="todo-list--list">{tasks}</ul>
+      <ul className="todo-list--list">
+        {tasks.length > 0 ? (
+          tasks
+        ) : (
+          <p className="todo-list alert-info">Brak zadań na liście.</p>
+        )}
+      </ul>
     </div>
   );
 }

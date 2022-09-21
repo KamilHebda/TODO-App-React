@@ -3,9 +3,9 @@ $light: rgb(245, 245, 245);
 
 .todo-list {
   min-width: 360px;
-  padding: 15px 0;
+  padding: 25px 0;
   & .alert-info {
-    padding-top: 5px;
+    padding-top: 10px;
     color: $dark-blue;
   }
   & h3 {
