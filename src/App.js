@@ -55,6 +55,7 @@ class App extends Component {
     tasks.forEach((task) => {
       if (task.id === id) {
         task.active = !task.active;
+        task.details = false;
       }
     });
     this.setState({
