@@ -1,0 +1,14 @@
+$dark-blue: rgb(2, 84, 161);
+$light: rgb(245, 245, 245);
+
+.todo-list {
+  min-width: 360px;
+  padding: 15px 0;
+  & .alert-info {
+    padding-top: 5px;
+    color: $dark-blue;
+  }
+  & h3 {
+    text-transform: uppercase;
+  }
+}

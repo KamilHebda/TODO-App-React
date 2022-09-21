@@ -1,0 +1,40 @@
+$light-dark: rgb(110, 113, 120);
+$light-blue: rgb(0, 132, 255);
+$light: rgb(245, 245, 245);
+
+.todo-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 15px;
+  padding-left: 20px;
+  text-align-last: left;
+  list-style: none;
+  background-color: $light;
+}
+
+.tools {
+  display: inline-block;
+  & button {
+    padding: 15px 10px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    &:hover {
+      background-color: #ddd;
+    }
+  }
+  &__complete {
+    color: $light-blue;
+  }
+  &__edit {
+    color: rgb(15, 179, 69);
+  }
+  &__details {
+    color: rgb(17, 19, 17);
+  }
+  &__delete {
+    color: tomato;
+  }
+}

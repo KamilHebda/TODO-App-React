@@ -1,0 +1,40 @@
+$deep-dark: rgb(26, 26, 26);
+$light-dark: rgb(110, 113, 120);
+$light: rgb(245, 245, 245);
+
+.details__container {
+  flex-basis: 40%;
+  margin-left: 3vw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  min-width: 340px;
+  color: $deep-dark;
+  & h1 {
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  & h2,
+  p {
+    margin-bottom: 20px;
+  }
+  & button {
+    width: 90%;
+    max-width: 300px;
+    margin: 20px;
+    padding: 10px 20px;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    border: 1px solid $light-dark;
+    border-radius: 5px;
+    color: $light-dark;
+    background-color: $light;
+    transition: background-color 0.3s, color 0.3s;
+    &:hover {
+      color: $light;
+      background-color: $light-dark;
+    }
+  }
+}
