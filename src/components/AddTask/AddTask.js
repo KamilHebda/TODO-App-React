@@ -7,8 +7,8 @@ class AddTask extends Component {
   state = {
     text: "",
     description: "",
-    // date: new Date().toISOString().slice(0, 10),
     finishDate: this.minDate,
+    valid: true,
   };
 
   handleText = (e) => {
@@ -29,7 +29,24 @@ class AddTask extends Component {
     });
   };
 
-  handleClick = () => {};
+  handleClick = () => {
+    const { text, description, finishDate } = this.state;
+    if (text !== "" && description !== "") {
+      const add = this.props.add(text, description, finishDate);
+      if (add) {
+        this.setState({
+          text: "",
+          description: "",
+          finishDate: this.minDate,
+          valid: true,
+        });
+      }
+    } else {
+      this.setState({
+        valid: false,
+      });
+    }
+  };
 
   render() {
     return (
@@ -65,7 +82,9 @@ class AddTask extends Component {
         <button className="todo__header-add-btn" onClick={this.handleClick}>
           Dodaj zadanie
         </button>
-        <p className="todo__header-alert">Uzupełnij wszystkie pola!</p>
+        {this.state.valid ? null : (
+          <p className="todo__header-alert">Uzupełnij wszystkie pola</p>
+        )}
       </div>
     );
   }

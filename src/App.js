@@ -6,34 +6,15 @@ import TaskList from "../src/components/TaskList/TaskList";
 import "./App.scss";
 
 class App extends Component {
+  counter = 1;
   state = {
     tasks: [
       {
         id: 0,
-        text: "Nauczyć się React",
-        description: "Ogarnąć hooki i MobX",
-        date: null,
-        finishDate: "2022-09-30",
-        active: true,
-        edit: false,
-        details: true,
-      },
-      {
-        id: 1,
-        text: "Nauczyć się TypeScript",
-        description: "Damy radę",
-        date: null,
-        finishDate: "2022-12-31",
-        active: true,
-        edit: false,
-        details: false,
-      },
-      {
-        id: 2,
-        text: "Nadal się uczyć",
-        description: "...",
-        date: null,
-        finishDate: "2023-12-31",
+        text: "Nauczyć się MobX",
+        description: "Ogarniemy...",
+        date: "2022-09-23",
+        finishDate: "2022-10-15",
         active: true,
         edit: false,
         details: false,
@@ -91,6 +72,26 @@ class App extends Component {
     });
   };
 
+  addTask = (text, description, finishDate) => {
+    const task = {
+      id: this.counter,
+      text: text,
+      description: description,
+      date: new Date().toISOString().slice(0, 10),
+      finishDate: finishDate,
+      active: true,
+      edit: false,
+      details: false,
+    };
+    this.counter++;
+
+    this.setState((prevState) => ({
+      tasks: [...prevState.tasks, task],
+    }));
+
+    return true;
+  };
+
   render() {
     return (
       <div className="App">
@@ -99,7 +100,7 @@ class App extends Component {
           closeDetails={this.closeDetails}
         />
         <div className="todo">
-          <AddTask />
+          <AddTask add={this.addTask} />
           <TaskList
             tasks={this.state.tasks}
             delete={this.deleteTask}
