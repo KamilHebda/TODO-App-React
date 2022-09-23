@@ -2,24 +2,39 @@ import React, { Component } from "react";
 import DetailsList from "../src/components/DetailsList/DetailsList";
 import AddTask from "../src/components/AddTask/AddTask";
 import TaskList from "../src/components/TaskList/TaskList";
+import LoadingIcon from "./components/UI/LoadingIcon/LoadingIcon";
 
 import "./App.scss";
 
 class App extends Component {
-  counter = 1;
+  counter = 2;
+
+  tasks = [
+    {
+      id: 0,
+      text: "Nauczyć się MobX",
+      description: "Ogarniemy...",
+      date: "2022-09-23",
+      finishDate: "2022-10-15",
+      active: true,
+      edit: false,
+      details: false,
+    },
+    {
+      id: 1,
+      text: "Nauczyć się TypeScript",
+      description: "To też ogarniemy...",
+      date: "2022-09-23",
+      finishDate: "2022-10-15",
+      active: true,
+      edit: false,
+      details: false,
+    },
+  ];
+
   state = {
-    tasks: [
-      {
-        id: 0,
-        text: "Nauczyć się MobX",
-        description: "Ogarniemy...",
-        date: "2022-09-23",
-        finishDate: "2022-10-15",
-        active: true,
-        edit: false,
-        details: false,
-      },
-    ],
+    tasks: [],
+    loading: true,
   };
 
   deleteTask = (id) => {
@@ -42,10 +57,6 @@ class App extends Component {
     this.setState({
       tasks,
     });
-  };
-
-  editTask = (id) => {
-    console.log("edytuj w APP" + id);
   };
 
   taskDetails = (id) => {
@@ -92,6 +103,24 @@ class App extends Component {
     return true;
   };
 
+  editTask = (id) => {
+    const tasks = [...this.state.tasks];
+    tasks.forEach((task) => {
+      if (task.id === id) {
+        task.edit = !task.edit;
+      }
+    });
+    this.setState({
+      tasks,
+    });
+  };
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ tasks: this.tasks, loading: false });
+    }, 1000);
+  }
+
   render() {
     return (
       <div className="App">
@@ -101,13 +130,17 @@ class App extends Component {
         />
         <div className="todo">
           <AddTask add={this.addTask} />
-          <TaskList
-            tasks={this.state.tasks}
-            delete={this.deleteTask}
-            complete={this.completeTask}
-            edit={this.editTask}
-            details={this.taskDetails}
-          />
+          {this.state.loading ? (
+            <LoadingIcon />
+          ) : (
+            <TaskList
+              tasks={this.state.tasks}
+              delete={this.deleteTask}
+              complete={this.completeTask}
+              edit={this.editTask}
+              details={this.taskDetails}
+            />
+          )}
         </div>
       </div>
     );
