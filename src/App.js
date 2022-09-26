@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import DetailsList from "../src/components/DetailsList/DetailsList";
 import AddTask from "../src/components/AddTask/AddTask";
 import TaskList from "../src/components/TaskList/TaskList";
+import EditTask from "./components/EditTask/EditTask";
 import LoadingIcon from "./components/UI/LoadingIcon/LoadingIcon";
 
 import "./App.scss";
@@ -94,6 +95,7 @@ class App extends Component {
       edit: false,
       details: false,
     };
+
     this.counter++;
 
     this.setState((prevState) => ({
@@ -115,6 +117,18 @@ class App extends Component {
     });
   };
 
+  closePopup = (id) => {
+    const tasks = [...this.state.tasks];
+    tasks.forEach((task) => {
+      if (task.id === id) {
+        task.edit = false;
+      }
+    });
+    this.setState({
+      tasks,
+    });
+  };
+
   componentDidMount() {
     setTimeout(() => {
       this.setState({ tasks: this.tasks, loading: false });
@@ -122,6 +136,16 @@ class App extends Component {
   }
 
   render() {
+    const edit = this.state.tasks.filter((task) => task.edit);
+    const editTask = edit.map((task) => (
+      <EditTask
+        key={task.id}
+        task={task}
+        closePopup={this.closePopup}
+        edit={this.addEditedTask}
+      ></EditTask>
+    ));
+
     return (
       <div className="App">
         <DetailsList
@@ -142,6 +166,7 @@ class App extends Component {
             />
           )}
         </div>
+        {editTask}
       </div>
     );
   }
