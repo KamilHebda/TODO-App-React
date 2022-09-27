@@ -1,107 +1,86 @@
-import React, { Component } from "react";
-
+import { useState } from "react";
 import "./EditTask.scss";
 
-class EditTask extends Component {
-  minDate = new Date().toISOString().slice(0, 10);
+function EditTask(props) {
+  const minDate = new Date().toISOString().slice(0, 10);
 
-  state = {
-    id: this.props.task.id,
-    text: "",
-    description: "",
-    finishDate: this.minDate,
-    valid: true,
+  const [id, setId] = useState(props.task.id);
+  const [text, setText] = useState("");
+  const [description, setDescription] = useState("");
+  const [finishDate, setFinishDate] = useState(minDate);
+  const [valid, setValid] = useState(true);
+
+  const handleEditedText = (e) => {
+    setText(e.target.value);
   };
 
-  handleEditedText = (e) => {
-    this.setState({
-      text: e.target.value,
-    });
+  const handleEditedDescription = (e) => {
+    setDescription(e.target.value);
   };
 
-  handleEditedDescription = (e) => {
-    this.setState({
-      description: e.target.value,
-    });
+  const handleEditedDate = (e) => {
+    setFinishDate(e.target.value);
   };
 
-  handleEditedDate = (e) => {
-    this.setState({
-      finishDate: e.target.value,
-    });
-  };
-
-  handleClickEdit = () => {
-    const { id, text, description, finishDate } = this.state;
+  const handleClickEdit = () => {
     if (text !== "" && description !== "") {
-      const editTask = this.props.edit(id, text, description, finishDate);
+      const editTask = props.edit(id, text, description, finishDate, valid);
       if (editTask) {
-        this.setState({
-          id: this.state.id,
-          text: "",
-          description: "",
-          finishDate: this.minDate,
-          valid: true,
-        });
+        setId(id);
+        setText("");
+        setDescription("");
+        setFinishDate(minDate);
+        setValid(true);
       }
     } else {
-      this.setState({
-        valid: false,
-      });
+      setValid(false);
     }
   };
 
-  render() {
-    return (
-      <div className="popup-shadow">
-        <div className="popup">
-          <h3>Edytuj zadanie:</h3>
-          <div className="popup__body">
-            {this.state.valid ? null : (
-              <p className="todo__header-alert">Uzupełnij wszystkie pola!</p>
-            )}
-            <input
-              type="text"
-              className="popup__body-input"
-              placeholder={this.props.task.text}
-              value={this.state.text}
-              onChange={this.handleEditedText}
-            />
-            <textarea
-              className="popup__body-details"
-              rows="5"
-              style={{ resize: "none" }}
-              placeholder={this.props.task.description}
-              value={this.state.description}
-              onChange={this.handleEditedDescription}
-            ></textarea>
-            <label htmlFor="date">
-              Wprowadź nową datę zakończenia zadania:
-            </label>
-            <input
-              type="date"
-              className="new-finish-date"
-              value={this.props.task.finishDate}
-              min={this.minDate}
-              onChange={this.handleEditedDate}
-            />
-            <button
-              className="popup__body-btn--accept"
-              onClick={this.handleClickEdit}
-            >
-              Zatwierdź
-            </button>
-            <button
-              className="popup__body-btn--cancel"
-              onClick={() => this.props.closePopup(this.props.task.id)}
-            >
-              Anuluj
-            </button>
-          </div>
+  return (
+    <div className="popup-shadow">
+      <div className="popup">
+        <h3>Edytuj zadanie:</h3>
+        <div className="popup__body">
+          {valid ? null : (
+            <p className="todo__header-alert">Uzupełnij wszystkie pola!</p>
+          )}
+          <input
+            type="text"
+            className="popup__body-input"
+            placeholder={props.task.text}
+            value={text}
+            onChange={handleEditedText}
+          />
+          <textarea
+            className="popup__body-details"
+            rows="5"
+            style={{ resize: "none" }}
+            placeholder={props.task.description}
+            value={description}
+            onChange={handleEditedDescription}
+          ></textarea>
+          <label htmlFor="date">Wprowadź nową datę zakończenia zadania:</label>
+          <input
+            type="date"
+            className="new-finish-date"
+            value={finishDate}
+            min={minDate}
+            onChange={handleEditedDate}
+          />
+          <button className="popup__body-btn--accept" onClick={handleClickEdit}>
+            Zatwierdź
+          </button>
+          <button
+            className="popup__body-btn--cancel"
+            onClick={() => props.closePopup(props.task.id)}
+          >
+            Anuluj
+          </button>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default EditTask;
