@@ -34,10 +34,10 @@ class EditTask extends Component {
   handleClickEdit = () => {
     const { id, text, description, finishDate } = this.state;
     if (text !== "" && description !== "") {
-      const edit = this.props.edit(id, text, description, finishDate);
-      if (edit) {
+      const editTask = this.props.edit(id, text, description, finishDate);
+      if (editTask) {
         this.setState({
-          id: id,
+          id: this.state.id,
           text: "",
           description: "",
           finishDate: this.minDate,

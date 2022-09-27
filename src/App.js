@@ -110,10 +110,25 @@ class App extends Component {
     tasks.forEach((task) => {
       if (task.id === id) {
         task.edit = !task.edit;
+        task.details = false;
       }
     });
     this.setState({
       tasks,
+    });
+  };
+
+  setEditedTask = (id, text, description, finishDate) => {
+    this.setState({
+      tasks: this.state.tasks.map((task) => {
+        if (task.id === id) {
+          task.text = text;
+          task.description = description;
+          task.finishDate = finishDate;
+          task.edit = false;
+        }
+        return task;
+      }),
     });
   };
 
@@ -142,7 +157,7 @@ class App extends Component {
         key={task.id}
         task={task}
         closePopup={this.closePopup}
-        edit={this.addEditedTask}
+        edit={this.setEditedTask}
       ></EditTask>
     ));
 
