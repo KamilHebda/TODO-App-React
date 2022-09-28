@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./AddTask.scss";
 
 function AddTask(props) {
@@ -34,6 +34,10 @@ function AddTask(props) {
       setValid(false);
     }
   };
+
+  useEffect(() => {
+    document.querySelector(".todo__header-title").focus();
+  }, []);
 
   return (
     <div className="todo__header">
