@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./EditTask.scss";
 
 function EditTask(props) {
@@ -36,6 +36,10 @@ function EditTask(props) {
       setValid(false);
     }
   };
+
+  useEffect(() => {
+    document.querySelector(".popup__body-input").focus();
+  }, []);
 
   return (
     <div className="popup-shadow">
