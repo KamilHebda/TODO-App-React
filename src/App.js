@@ -4,7 +4,6 @@ import AddTask from "../src/components/AddTask/AddTask";
 import TaskList from "../src/components/TaskList/TaskList";
 import EditTask from "./components/EditTask/EditTask";
 import LoadingIcon from "./components/UI/LoadingIcon/LoadingIcon";
-
 import "./App.scss";
 
 class App extends Component {
