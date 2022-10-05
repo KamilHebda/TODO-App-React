@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./EditTask.scss";
 
 function EditTask(props) {
@@ -9,6 +9,8 @@ function EditTask(props) {
   const [description, setDescription] = useState("");
   const [finishDate, setFinishDate] = useState(minDate);
   const [valid, setValid] = useState(true);
+
+  const inputRef = useRef(null);
 
   const handleEditedText = (e) => {
     setText(e.target.value);
@@ -37,8 +39,12 @@ function EditTask(props) {
     }
   };
 
+  const focusInput = () => {
+    inputRef.current.focus();
+  };
+
   useEffect(() => {
-    document.querySelector(".popup__body-input").focus();
+    focusInput();
   }, []);
 
   return (
@@ -50,6 +56,7 @@ function EditTask(props) {
             <p className="todo__header-alert">Uzupełnij wszystkie pola!</p>
           )}
           <input
+            ref={inputRef}
             type="text"
             className="popup__body-input"
             placeholder={props.task.text}

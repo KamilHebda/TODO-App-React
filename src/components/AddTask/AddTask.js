@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./AddTask.scss";
 
 function AddTask(props) {
@@ -8,6 +8,8 @@ function AddTask(props) {
   const [description, setDescription] = useState("");
   const [finishDate, setFinishDate] = useState(minDate);
   const [valid, setValid] = useState("true");
+
+  const inputRef = useRef(null);
 
   const handleText = (e) => {
     setText(e.target.value);
@@ -35,8 +37,12 @@ function AddTask(props) {
     }
   };
 
+  const focusInput = () => {
+    inputRef.current.focus();
+  };
+
   useEffect(() => {
-    document.querySelector(".todo__header-title").focus();
+    focusInput();
   }, []);
 
   return (
@@ -45,6 +51,7 @@ function AddTask(props) {
         <i className="fa-solid fa-note-sticky"></i>TODO List
       </h1>
       <input
+        ref={inputRef}
         type="text"
         className="todo__header-title"
         placeholder="Wpisz treść zadania..."

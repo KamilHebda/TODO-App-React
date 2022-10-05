@@ -25,7 +25,7 @@ class App extends Component {
       text: "Nauczyć się TypeScript",
       description: "To też ogarniemy...",
       date: "2022-09-23",
-      finishDate: "2022-10-15",
+      finishDate: "2022-11-15",
       active: true,
       edit: false,
       details: false,
