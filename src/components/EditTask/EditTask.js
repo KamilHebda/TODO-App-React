@@ -5,8 +5,8 @@ function EditTask(props) {
   const minDate = new Date().toISOString().slice(0, 10);
 
   const [id, setId] = useState(props.task.id);
-  const [text, setText] = useState("");
-  const [description, setDescription] = useState("");
+  const [text, setText] = useState(props.task.text);
+  const [description, setDescription] = useState(props.task.description);
   const [finishDate, setFinishDate] = useState(minDate);
   const [valid, setValid] = useState(true);
 
@@ -59,7 +59,6 @@ function EditTask(props) {
             ref={inputRef}
             type="text"
             className="popup__body-input"
-            placeholder={props.task.text}
             value={text}
             onChange={handleEditedText}
           />
@@ -67,7 +66,6 @@ function EditTask(props) {
             className="popup__body-details"
             rows="5"
             style={{ resize: "none" }}
-            placeholder={props.task.description}
             value={description}
             onChange={handleEditedDescription}
           ></textarea>
