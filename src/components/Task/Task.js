@@ -1,4 +1,11 @@
 import "./Task.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCheck,
+  faPenToSquare,
+  faMagnifyingGlass,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
 
 function Task(props) {
   const { text, id, active } = props.task;
@@ -19,16 +26,16 @@ function Task(props) {
           className="tools__complete"
           style={{ color: active ? "rgb(0, 132, 255)" : "gray" }}
         >
-          <i className="fas fa-check"></i>
+          <FontAwesomeIcon icon={faCheck} />
         </button>
         <button onClick={() => props.edit(id)} className="tools__edit">
-          <i className="fa-solid fa-pen-to-square"></i>
+          <FontAwesomeIcon icon={faPenToSquare} />
         </button>
         <button onClick={() => props.details(id)} className="tools__details">
-          <i className="fa-solid fa-magnifying-glass"></i>
+          <FontAwesomeIcon icon={faMagnifyingGlass} />
         </button>
         <button onClick={() => props.delete(id)} className="tools__delete">
-          <i className="fas fa-times"></i>
+          <FontAwesomeIcon icon={faTimes} />
         </button>
       </div>
     </li>
