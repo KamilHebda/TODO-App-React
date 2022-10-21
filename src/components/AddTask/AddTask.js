@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "./AddTask.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faNoteSticky } from "@fortawesome/free-solid-svg-icons";
 
 function AddTask(props) {
   const minDate = new Date().toISOString().slice(0, 10);
@@ -38,7 +40,8 @@ function AddTask(props) {
   return (
     <div className="todo__header">
       <h1>
-        <i className="fa-solid fa-note-sticky"></i>TODO List
+        <FontAwesomeIcon icon={faNoteSticky} />
+        TODO List
       </h1>
       <input
         type="text"
